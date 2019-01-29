@@ -72,7 +72,7 @@ public class Client {
 		while(true) {
 			sc = new Scanner(System.in);
 			sc.reset();
-			System.out.print("user1:");
+			System.out.print("홍길동:");
 			String data = sc.nextLine();
 			if(data.equalsIgnoreCase("Quit")) {
 				client.close();

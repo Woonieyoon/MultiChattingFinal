@@ -50,6 +50,7 @@ public class ServerReceiver {
 						System.out.println("들어온 토큰:" + tokendata);
 
 						boolean check = requestManager.getMap().containsKey(tokendata);
+						System.out.println("확인:" + check);
 						if (check) {
 							SplitedTokenProcessor processor = requestManager.getMap().get(tokendata);
 							processor.Process(socket, data);

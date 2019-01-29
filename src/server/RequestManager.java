@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestManager {
+
 	private ServerClient serverClient;
 	Map<String, SplitedTokenProcessor> map = new HashMap<>();
 

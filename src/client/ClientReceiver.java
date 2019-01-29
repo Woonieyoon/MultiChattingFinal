@@ -18,7 +18,7 @@ public class ClientReceiver {
 			try {
 				DataInputStream inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 				String data = inputStream.readUTF();
-				// System.out.println("[받기 완료]" + data);
+				System.out.println("[받기 완료]" + data);
 
 			} catch (IOException e) {
 				e.printStackTrace();
