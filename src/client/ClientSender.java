@@ -3,6 +3,7 @@ package client;
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class ClientSender {
 
@@ -12,16 +13,21 @@ public class ClientSender {
 		this.socket = socket;
 	}
 
-	public void send(String data) {
+	public void send(String userName) {
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
-				try {
+				try(Scanner scan = new Scanner(System.in);) {
 					DataOutputStream outputstream = new DataOutputStream(
 							new BufferedOutputStream(socket.getOutputStream()));
-					outputstream.writeUTF(data);
+					outputstream.writeUTF(userName);
 					outputstream.flush();
-					// System.out.println("[전송 완료]");
+					while (true) {
+						String content = scan.nextLine();						
+						outputstream.writeUTF(content);
+						outputstream.flush();
+					}
+					
 				} catch (Exception e) {
 					System.out.println("서버 통신 안됨");
 				}

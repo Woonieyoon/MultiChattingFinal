@@ -9,10 +9,13 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import server.room.RoomManager;
+
 public class ServerManager {
 	private List<ServerClient> connections = new ArrayList<ServerClient>();
 	private ExecutorService executorService;
 	private ServerSocket serverSocket;
+	private RoomManager roomManager;
 
 	public ServerManager(ServerSocket serverSocket) {
 		this.serverSocket = serverSocket;
@@ -20,6 +23,8 @@ public class ServerManager {
 
 	public void init() {
 		executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+		roomManager = new RoomManager();
+		roomManager.createRoom("All");
 	}
 
 	public void execute() {
@@ -34,7 +39,7 @@ public class ServerManager {
 						String message = "[연결 수락: " + socket.getRemoteSocketAddress() + " ]" + "  /  "
 								+ Thread.currentThread().getName();
 						System.out.println(message);
-						ServerClient client = new ServerClient(socket, executorService, connections);
+						ServerClient client = new ServerClient(socket, executorService, connections , roomManager);
 						connections.add(client);
 						System.out.println("[클라이언트 접속자수: " + connections.size() + "]");
 					} catch (IOException e) {

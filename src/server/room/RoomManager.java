@@ -1,14 +1,32 @@
 package server.room;
 
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoomManager {
-	List<Room> roomList = new ArrayList<>();
+	
+	private List<Room> roomList = new ArrayList<>();
 
-	public void makeRoom(Socket socket) {
-
+	public RoomManager() {
+		roomList = new ArrayList<Room>();
 	}
+	
+	public List<Room> getRoomList() {
+		return roomList;
+	}
+
+	public Room createRoom(String title) {
+		Room room = new Room(title);
+		roomList.add(room);
+		System.out.println("Room Create!!");
+		return room;
+	}
+	
+	public void RemoveRoom(Room room) {
+		roomList.remove(room);
+		System.out.println("Room Remove");
+	}
+	
+	
 
 }

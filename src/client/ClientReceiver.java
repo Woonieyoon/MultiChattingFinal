@@ -14,18 +14,26 @@ public class ClientReceiver {
 	}
 
 	public void receive() {
-		while (true) {
-			try {
-				DataInputStream inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
-				String data = inputStream.readUTF();
-				System.out.println("[받기 완료]" + data);
+		Thread thread = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						DataInputStream inputStream = new DataInputStream(
+								new BufferedInputStream(socket.getInputStream()));
+						String data = inputStream.readUTF();
+						System.out.println(data);
 
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.out.println("서버 통신 안됨");
-				break;
+					} catch (IOException e) {
+						e.printStackTrace();
+						System.out.println("서버 통신 안됨");
+						break;
+					}
+				}
 			}
-		}
+		};
+		thread.start();
+
 	}
 
 }

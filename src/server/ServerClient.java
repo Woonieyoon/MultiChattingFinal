@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import server.room.Room;
+import server.room.RoomManager;
+
 
 public class ServerClient {
 
@@ -13,12 +16,30 @@ public class ServerClient {
 	private final ExecutorService executorService;
 	private List<ServerClient> connections = new ArrayList<ServerClient>();
 	private String userName;
-	
-	ServerClient(Socket socket,ExecutorService executorService,List<ServerClient> connections ) {
+	private RoomManager roomManager;
+	private Room room;
+		
+	ServerClient(Socket socket,ExecutorService executorService,List<ServerClient> connections ,RoomManager roomManager) {
 		this.socket = socket;
 		this.executorService = executorService;
 		this.connections = connections;
+		this.roomManager = roomManager;
+		init();
 		receive();
+	}
+
+	public void init() {
+		for (Room tempRoom : roomManager.getRoomList()) {
+			if (tempRoom.getRoomTitle().equals("All"))
+			{	
+				tempRoom.EnterRoom(this);
+				room = tempRoom;
+			}
+		}
+	}
+	
+	public RoomManager getRoomManager() {
+		return roomManager;
 	}
 	
 	public String getUserName() {
@@ -40,6 +61,15 @@ public class ServerClient {
 	public List<ServerClient> getConnections() {
 		return connections;
 	}
+	
+	public Room getRoom() {
+		return room;
+	}
+
+	public void setRoom(Room room) {
+		this.room = room;
+	}
+
 
 	public void receive() {
 		new ServerReceiver(this).receive();

@@ -3,7 +3,6 @@ package client;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Client {
 	private String ip;
@@ -64,22 +63,9 @@ public class Client {
 
 
 	public static void main(String[] args) {
-		Client client = new Client("localhost", 10020, "홍길동");
+		Client client = new Client("localhost", 10020, "고길동");
 		client.init();
 		client.execute();
-
-		Scanner sc;
-		while(true) {
-			sc = new Scanner(System.in);
-			sc.reset();
-			System.out.print("홍길동:");
-			String data = sc.nextLine();
-			if(data.equalsIgnoreCase("Quit")) {
-				client.close();
-				sc.close();
-			}
-			client.send(data);
-		}
 	}
 
 }

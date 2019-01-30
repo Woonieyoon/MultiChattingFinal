@@ -25,7 +25,7 @@ public class ServerReceiver {
 		requestManager = new RequestManager(serverClient);
 	}
 
-	public synchronized void receive() {
+	public void receive() {
 		System.out.println("서버 리시브");
 		Runnable runnable = new Runnable() {
 			@Override
@@ -47,13 +47,10 @@ public class ServerReceiver {
 						}
 
 						String tokendata = data.split(":")[0];
-						System.out.println("들어온 토큰:" + tokendata);
-
 						boolean check = requestManager.getMap().containsKey(tokendata);
-						System.out.println("확인:" + check);
 						if (check) {
 							SplitedTokenProcessor processor = requestManager.getMap().get(tokendata);
-							processor.Process(socket, data);
+							processor.Process(socket, data.split(":")[1]);
 						}
 
 					} catch (IOException e) {
