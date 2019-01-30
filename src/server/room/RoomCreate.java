@@ -3,7 +3,7 @@ package server.room;
 import java.net.Socket;
 
 import server.ServerClient;
-import server.SplitedTokenProcessor;
+import server.splitprocessor.SplitedTokenProcessor;
 
 public class RoomCreate implements SplitedTokenProcessor{
 

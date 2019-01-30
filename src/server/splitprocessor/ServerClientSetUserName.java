@@ -1,6 +1,8 @@
-package server;
+package server.splitprocessor;
 
 import java.net.Socket;
+
+import server.ServerClient;
 
 public class ServerClientSetUserName implements SplitedTokenProcessor {
 

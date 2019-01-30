@@ -1,4 +1,4 @@
-package server;
+package server.splitprocessor;
 
 import java.net.Socket;
 

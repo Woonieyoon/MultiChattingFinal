@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
+import server.splitprocessor.SplitedTokenProcessor;
+
 public class ServerReceiver {
 
 	private Socket socket;

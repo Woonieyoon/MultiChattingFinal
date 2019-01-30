@@ -1,7 +1,8 @@
-package server;
+package server.splitprocessor;
 
 import java.net.Socket;
 
+import server.ServerClient;
 import server.room.Room;
 import server.room.RoomManager;
 
